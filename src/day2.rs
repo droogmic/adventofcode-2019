@@ -19,7 +19,7 @@ pub fn main2() {
     let mut memory = input.to_vec();
     memory[1] = 12; memory[2] = 2;
     program(&mut memory);
-    //println!("{:?}", memory);
+    println!("{}", memory[0]);
     assert_eq!(memory[0], 5305097);
 
     // Part 2
@@ -31,6 +31,8 @@ pub fn main2() {
             program(&mut memory);
             if memory[0] == target {
                 println!("{}", 100*noun + verb);
+                assert_eq!(noun, 49);
+                assert_eq!(verb, 25);
                 return;
             }
         }
@@ -39,10 +41,7 @@ pub fn main2() {
 
 fn program(memory: &mut Vec<usize>) {
     let mut pc = 0_usize;
-    loop {
-        if op(memory, pc) {
-            break;
-        }
+    while !op(memory, pc) {
         pc += 4;
     }
 }
@@ -58,9 +57,7 @@ fn op(memory: &mut Vec<usize>, pc: usize) -> bool {
             memory[result] = memory[left] * memory[right];
         },
         99 => return true,
-        _ => {
-            eprintln!("Unknown op");
-        }
+        _ => eprintln!("Unknown op"),
     }
     return false;
 }
