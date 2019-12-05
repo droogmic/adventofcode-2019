@@ -1,20 +1,19 @@
 pub fn main1(input: String) {
-    let total_weight: u32 = input.lines()
+    let total_weight: u32 = input
+        .lines()
         .map(|line| {
-            let part_weight: u32 = line.parse()
-                .expect("Non integer input");
+            let part_weight: u32 = line.parse().expect("Non integer input");
             calc(part_weight).expect("Part too light")
         })
         .sum();
     assert_eq!(3423279, total_weight);
     println!("{}", total_weight);
 
-    let total_weight: u32 = input.lines()
+    let total_weight: u32 = input
+        .lines()
         .map(|line| {
-            let part_weight: u32 = line.parse()
-                .expect("Non integer input");
-            let mut fuel_weight = calc(part_weight)
-                .expect("Part too light");
+            let part_weight: u32 = line.parse().expect("Non integer input");
+            let mut fuel_weight = calc(part_weight).expect("Part too light");
             let mut weight: u32 = 0;
             loop {
                 weight += fuel_weight;
